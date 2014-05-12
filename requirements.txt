@@ -1,0 +1,6 @@
+dnspython
+xmpppy
+requests
+flask
+flask-login
+python-ldap
