@@ -6,6 +6,7 @@
 		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.min.css') }}" />
 		<link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
 		<link rel="stylesheet" type="text/css" href="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.16/themes/hot-sneaks/jquery-ui.css" />
+		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/auth.css') }}" />
 		<script src="{{ url_for('static', filename='js/jquery.js') }}"></script>
 		<script src="{{ url_for('static', filename='js/bootstrap.js') }}"></script>
 		<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
@@ -65,22 +66,32 @@
 			</div>
 		</div>
 		</nav>
-		<div class="container">
-			{% with messages = get_flashed_messages(with_categories=true) %}
-				{% if messages %}
-					{% for category, message in messages %}
-					<div class="alert alert-{% if category != "message" %}{{ category }}{% else %}danger{% endif %}">
-						<a class="close" data-dismiss="alert">x</a>
-							{{ message }}
-						</a>
-					</div>
-					{% endfor %}
-				{% endif %}
-			{% endwith %}
-			<h1>{% block header %}{% endblock %}</h1>
-			{% block body %}
-			{% endblock %}
+		<div id="wrap">
+			<div id="main" class="container">
+				{% with messages = get_flashed_messages(with_categories=true) %}
+					{% if messages %}
+						{% for category, message in messages %}
+						<div class="alert alert-{% if category != "message" %}{{ category }}{% else %}danger{% endif %}">
+							<a class="close" data-dismiss="alert">x</a>
+								{{ message }}
+							</a>
+						</div>
+						{% endfor %}
+					{% endif %}
+				{% endwith %}
+				<h1>{% block header %}{% endblock %}</h1>
+				{% block body %}
+				{% endblock %}
+			</div>
 		</div>
+		<footer class="footer">
+			<hr>
+			<div class="container">
+				<p><small>Romeo Auth</small></p>
+				<p><small>Modified & Maintained by Sklullus</small></p>
+				<p><a href="https://github.com/hreeder/RomeoAuth"><i class="icon-github-sign"></i></a> <a href="https://trello.com/b/G0u13q4J/auth"><i class="icon-trello"></i></a> <a href="https://twitter.com/sklullus"><i class="icon-twitter-sign"></i></a></p>
+			</div>
+		</footer>
 	</body>
 
 </html>

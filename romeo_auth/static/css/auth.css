@@ -1,0 +1,17 @@
+html, body {
+	height: 100%;
+}
+.footer {
+	position: relative;
+	height: 250px;
+	margin-top: -250px;
+	clear: both;
+	padding-top: 20px;
+}
+#wrap {
+	min-height: 92%;
+}
+#main {
+	overflow: auto;
+	padding-bottom: 250px;
+}
