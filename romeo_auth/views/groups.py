@@ -1,4 +1,5 @@
 from romeo_auth import app, ldaptools
+from romeo_auth.authutils import group_required, groups_required
 from flask import flash, render_template, redirect
 from flask.ext.login import login_required, current_user
 from ldap import MOD_ADD, MOD_DELETE, MOD_REPLACE
@@ -17,8 +18,8 @@ def groupadmin():
 	if "admin" in current_user.authGroup:
 		groups = groups=app.config["groups"]["closedgroups"]+app.config["groups"]["opengroups"]
 	else:
-		groups = map(lambda x:x[6:], filter(lambda x:x.startswith("admin-"), current_user.authGroup))	p
-endingusers = ldaptools.getusers("authGroup=*-pending")
+		groups = map(lambda x:x[6:], filter(lambda x:x.startswith("admin-"), current_user.authGroup))
+	pendingusers = ldaptools.getusers("authGroup=*-pending")
 	applications = []
 	for user in pendingusers:
 		for group in user.get_pending_authgroups():
