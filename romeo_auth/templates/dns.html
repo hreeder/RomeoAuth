@@ -1,6 +1,6 @@
 {% extends "base.html" %}
-{% block title %}Services{% endblock %}
-{% block header %}Services{% endblock %}
+{% block title %}DNS{% endblock %}
+{% block header %}DNS Records{% endblock %}
 {% block body %}
 
 <div class="row">
@@ -14,6 +14,7 @@
 						<th>Name</th>
 						<th>TTL</th>
 						<th>Value</th>
+						<th>Actions</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -23,6 +24,10 @@
 						<td>{{ record.name }}</td>
 						<td>{{ record.ttl_ceil }}</td>
 						<td>{{ record.content }}</td>
+						<td>
+							<a href="" class="btn btn-warning btn-xs">Edit</a>
+							<a href="" class="btn btn-danger btn-xs">Delete</a>
+						</td>
 					</tr>
 					{% endfor %}
 				</tbody>
@@ -33,7 +38,7 @@
 		<div class="panel panel-info">
 			<div class="panel-heading"><h3 class="panel-title">Actions</h3></div>
 			<div class="panel-body">
-				
+				<a href="" class="btn btn-primary btn-block">New Entry</a>
 			</div>
 		</div>
 	</div>
