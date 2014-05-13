@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}Admin{% endblock %}
+{% block header %}Admin{% endblock %}
+{% block body %}
+	<div class="col-md-6">
+		<div class="panel panel-primary">
+			<div class="panel-heading"><h3 class="panel-title">Lookup User</h3></div>
+			<div class="panel-body">
+				<form action="/admin/lookup" method="POST">
+					<label for="userid">User ID</label><br />
+					<div class="input-group">
+						<input class="form-control" rows=6 style="width:100%" type="text" name="userid"></input>
+						<span class="input-group-btn">
+							<button type="submit" class="btn btn-primary" value="submit" />Lookup</button>
+						</span>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-md-6">
+		<div class="panel panel-primary">
+			<div class="panel-heading"><h3 class="panel-title">Actions</h3></div>
+			<div class="panel-body">
+				<p><a href="/admin/listusers" class="btn btn-primary btn-block">List All Users</a></p>
+				<p><a href="/admin/listusers/active" class="btn btn-info btn-block">List Active Users</a></p>
+				<p><a href="/admin/listusers/inactive" class="btn btn-danger btn-block">List Inactive Users</a></p>
+			</div>
+		</div>
+	</div>
+{% endblock %}

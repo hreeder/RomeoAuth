@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% block title %}User Signup{% endblock %}
+{% block header %}User Signup{% endblock %}
+{% block body %}
+	<div class="progress">
+			<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 50%;">
+			<span class="sr-only">50% Complete</span>
+		</div>
+	</div>
+	<div class="row well form-inline custom-form">
+		<h3>Account Settings</h3>
+		<form id="account" name="account" action="/create_account" method="post">
+		Please do not have any special characters or spaces in your username or you will not be able to access some services such as Jabber
+			<table class="table">
+				<tr>
+					<th scope="row"><label for="username">Username</label></th>
+					<td><input id="username" type="text" name="username" class="form-control"/></td>
+				</tr>
+				<tr>
+					<th scope="row"><label for="characterName">Display/Character Name</label></th>
+					<td><input id="characterName" type="text" name="characterName" class="form-control"/></td>
+				</tr>
+				<tr>
+					<th scope="row"><label for="email">Email Address</label></th>
+					<td><input id="email" type="text" name="email" class="form-control"/></td>
+				</tr>
+				<tr>
+					<th scope="row"><label for="password">Password</label></th>
+					<td><input id="password" type="password" name="password" class="form-control" /></td>
+				</tr>
+				<tr>
+					<th scope="row"><label for="password_confirm">Confirm Password</label></th>
+					<td><input id="password_confirm" type="password" name="password_confirm" class="form-control" /></td>
+				</tr>
+			</table>
+			<button type="submit" class="btn btn-primary" value="submit" />Submit</button>
+		</form>
+		<script src="http://jquery.bassistance.de/validate/jquery.validate.js"></script>
+		<script src="http://jquery.bassistance.de/validate/additional-methods.js"></script>
+		<script>
+			$( "#account" ).validate({
+				rules: {
+					username: {
+						required: true
+					},
+					characterName: "required",
+					email: {
+						required: true,
+						email: true
+					},
+					password: "required",
+					password_confirm: {
+						equalTo: "#password"
+					}
+				}
+			});
+		</script>
+
+		</div>
+{% endblock %}

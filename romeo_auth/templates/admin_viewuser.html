@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block title %}Admin{% endblock %}
+{% block header %}Admin{% endblock %}
+{% block body %}
+<div class="col-md-9">
+	<div class="panel panel-primary">
+		<div class="panel-heading"><h3 class="panel-title">View User: {{ user['uid'][0] }}</h3></div>
+		<div class="panel-body">
+			<ul>
+			{% for key, value in user.iteritems() %}
+				<li>
+					<b>{{ key }}</b>: {{ value|length==1 and value[0] or value }}
+				</li>
+			{% endfor %}
+			</ul>
+		</div>
+	</div>
+</div>
+
+<div class="col-md-3">
+	<div class="panel panel-info">
+		<div class="panel-heading"><h3 class="panel-title">Actions</h3></div>
+		<div class="panel-body">
+			{% if user['accountStatus'][0] != "romeo" %}
+				<p><a href="/admin/user/{{ user['uid'][0] }}/activate" class="btn btn-danger btn-block">Enable Account</a></p>
+			{% else %}
+				<p><a href="/admin/user/{{ user['uid'][0] }}/disable" class="btn btn-danger btn-block">Disable Account</a></p>
+			{% endif %}
+			<p><a href="/admin/user/{{ user['uid'][0] }}/delete" class="btn btn-danger btn-block">Delete User</a></p>
+			<p><div class="dropdown">
+				<button class="btn btn-info btn-block dropdown-toggle" type="button" id="ddAddGroup" data-toggle="dropdown">Add User to Group <b class="caret"></b></button>
+				<ul class="dropdown-menu" role="menu" aria-labelledby="ddAddGroup">
+					{% for group in [config.groups.closedgroups, config.groups.opengroups] %}
+						{% for ig in group %}
+							<li><a href="/admin/user/{{ user['uid'][0] }}/addgroup/{{ ig }}">{{ ig }}</a></li>
+						{% endfor %}
+					{% endfor %}
+				</ul>
+			</div></p>
+                        <p><div class="dropdown">
+                                <button class="btn btn-info btn-block dropdown-toggle" type="button" id="ddDelGroup" data-toggle="dropdown">Remove User from Group <b class="caret"></b></button>
+                                <ul class="dropdown-menu" role="menu" aria-labelledby="ddDelGroup">
+					{% for group in user['authGroup'] %}
+					<li><a href="/admin/user/{{ user['uid'][0] }}/delgroup/{{ group }}">{{ group }}</a></li>
+					{% endfor %}
+                                </ul>
+                        </div></p>
+		</div>
+	</div>
+</div>
+{% endblock %}
