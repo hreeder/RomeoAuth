@@ -34,4 +34,4 @@ login_manager.login_view = "/login"
 def shutdown_session(exception=None):
 	pass
 
-from romeo_auth.views import admin, core, registration, users, ping
+from romeo_auth.views import admin, api, core, groups, ping, registration, users
