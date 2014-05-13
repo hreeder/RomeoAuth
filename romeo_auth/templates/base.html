@@ -50,6 +50,7 @@
 
 				{% if current_user.is_admin() %}
 					<li><a href="/groups/admin">Group Admin</a></li>
+					{% if "cloudflare" in config %}<li><a href="/dns">DNS</a></li>{% endif %}
 					<li><a href="/admin">Admin</a></li>
 				{% endif %}
 				{% if current_user.can_ping() %}
