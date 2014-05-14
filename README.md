@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/hreeder/romeoauth.png?label=ready&title=Ready)](https://waffle.io/hreeder/romeoauth)
 # Romeo Auth
 This project is forked from PIZZA Auth, hosted here: https://bitbucket.org/Sylnai/pizza-auth
 Romeo Auth is an LDAP User Management tool, designed to regulate access to a number of services, such as forums, jabber, teamspeak and other web apps.
