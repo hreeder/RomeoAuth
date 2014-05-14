@@ -3,6 +3,7 @@ from romeo_auth.authutils import group_required
 from flask import render_template, request, redirect
 from flask.ext.login import login_required
 
+valid_record_types = ['A', 'CNAME', 'MX', 'TXT', 'SPF', 'AAAA', 'NS', 'SRV', 'LOC']
 
 @app.route('/dns')
 @login_required
@@ -19,10 +20,10 @@ def dns():
 @group_required('admin')
 def new_dns():
     type = request.form['type']
-    if type not in ['A', 'CNAME', 'MX', 'TXT', 'SPF', 'AAAA', 'NS', 'SRV', 'LOC']:
+    if type not in valid_record_types:
         flash('That record type was invalid', 'danger')
         return redirect('/dns')
-        
+
     name = request.form['name']
     ttl = request.form['ttl']
     value = request.form['value']
@@ -41,6 +42,24 @@ def new_dns():
         flash('Something bad happened. You may want to check if that record was created', 'danger')
 
     return redirect("/dns")
+
+
+@app.route('/dns/edit', methods=['POST', ])
+@login_required
+@group_required('admin')
+def edit_dns():
+    type = request.form['type']
+    if type not in ['A', 'CNAME', 'MX', 'TXT', 'SPF', 'AAAA', 'NS', 'SRV', 'LOC']:
+        flash('That record type was invalid', 'danger')
+        return redirect('/dns')
+
+    name = request.form['name']
+    ttl = request.form['ttl']
+    value = request.form['value']
+    if 'cloudflare' in request.form:
+        cf = True
+    else:
+        cf = False
 
 
 @app.route('/dns/delete/<id>')
