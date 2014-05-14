@@ -6,7 +6,7 @@
 <div class="row">
 	<div class="col-md-9">
 		<div class="panel panel-primary">
-			<div class="panel-heading"><h3 class="panel-title">Current Records for {{ config.auth.domain }}</h3></div>
+			<div class="panel-heading"><h3 class="panel-title">Current Records for <span id="domainName">{{ config.auth.domain }}</span></h3></div>
 			<table class="table table-striped table-hover">
 				<thead>
 					<tr>
@@ -28,7 +28,7 @@
 						<td class="recCF {{ record.rec_id }}">{% if record.props.cloud_on %}Yes{% else %}No{% endif %}</td>
 						<td>
 							<a id="edit-{{ record.rec_id }}" class="btn btn-warning btn-xs" onclick="editRecord(this)">Edit</a>
-							<a class="btn btn-danger btn-xs">Delete</a>
+							<a id="del-{{ record.rec_id }}" class="btn btn-danger btn-xs" onclick="deleteRecord(this)">Delete</a>
 						</td>
 					</tr>
 					{% endfor %}
@@ -98,7 +98,7 @@
 
 <div class="modal fade" id="newRecord" tabindex="-1" role="dialog" aria-labelledby="newRecordLabel" aria-hidden="true">
 	<div class="modal-dialog">
-	<form class="form-horizontal" role="form">
+	<form class="form-horizontal" role="form" action="/dns/new" method="POST">
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -139,18 +139,35 @@
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				<button type="button" class="btn btn-primary">Save changes</button>
+				<input type="submit" class="btn btn-primary" value="Save changes">
 			</div>
 		</div>
 	</form>
 	</div>
 </div>
 
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title" id="deleteModalLabel">Delete Record</h4>
+			</div>
+			<div class="modal-body">
+				<h3>Confirm Deletion of <span id="deleteName"></span></h3>
+				<h5>This cannot be undone</h5>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				<a href="/dns/delete/" id="deleteButton" class="btn btn-primary">Delete Record</a>
+			</div>
+		</div>
+	</div>
+</div>
+
 <script type="text/javascript">
 	function editRecord(button) {
 		var id = $(button).attr('id').split('-')[1];
-		console.log(id);
-		console.log('.recType.' + id);
 		var type = $('.recType.' + id).text();
 		var name = $('.recName.' + id).text();
 		var TTL = $('.recTTL.' + id).text();
@@ -169,6 +186,17 @@
 		}
 
 		$('#editModal').modal();
+	}
+
+	function deleteRecord(button) {
+		var id = $(button).attr('id').split('-')[1];
+		var name = $('.recName.' + id).text();
+		var domain = $('#domainName').text();
+
+		$('#deleteName').text(name + "." + domain);
+		$('#deleteButton').attr('href', '/dns/delete/' + id);
+
+		$('#deleteModal').modal();
 	}
 </script>
 {% endblock %}
