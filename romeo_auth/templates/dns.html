@@ -23,7 +23,7 @@
 					<tr>
 						<td class="recType {{ record.rec_id }}">{{ record.type }}</td>
 						<td class="recName {{ record.rec_id }}">{{ record.display_name }}</td>
-						<td class="recTTL {{ record.rec_id }}">{{ record.ttl_ceil }}</td>
+						<td class="recTTL {{ record.rec_id }}">{% if record.ttl == "1" %}Auto{% else %}{{ record.ttl }}{% endif %}</td>
 						<td class="recValue {{ record.rec_id }}">{{ record.content }}</td>
 						<td class="recCF {{ record.rec_id }}">{% if record.props.cloud_on %}Yes{% else %}No{% endif %}</td>
 						<td>
