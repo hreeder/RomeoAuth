@@ -12,6 +12,5 @@ html, body {
 	min-height: 92%;
 }
 #main {
-	overflow: auto;
 	padding-bottom: 250px;
 }
