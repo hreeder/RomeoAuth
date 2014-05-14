@@ -11,7 +11,7 @@ app = Flask(__name__)
 
 # Load configuration
 with open("config.json") as fh:
-	config=json.loads(fh.read())
+    config = json.loads(fh.read())
 assert(config)
 app.config.update(config)
 app.secret_key = os.urandom(24)
@@ -27,18 +27,20 @@ emailtools = EmailTools(app.config, app.jinja_loader)
 
 @login_manager.user_loader
 def load_user(userid):
-	return ldaptools.getuser(userid)
+    return ldaptools.getuser(userid)
 
 login_manager.login_view = "/login"
 
+
 @app.teardown_appcontext
 def shutdown_session(exception=None):
-	pass
+    pass
 
 from romeo_auth.views import admin, api, core, groups, ping, registration, users
 
 if "cloudflare" in config:
-	from pyflare import Pyflare
-	cloudflare = Pyflare(config['cloudflare']['email'], config['cloudflare']['apikey'])
+    from pyflare import Pyflare
+    cloudflare = Pyflare(
+        config['cloudflare']['email'], config['cloudflare']['apikey'])
 
-	from romeo_auth.views import dns
+    from romeo_auth.views import dns
