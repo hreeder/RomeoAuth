@@ -48,8 +48,11 @@
 					<li><a href="/services">Services</a></li>
 					<li><a href="/groups">Groups</a></li>
 
-				{% if current_user.is_admin() %}
+				{% if current_user.is_group_admin() %}
 					<li><a href="/groups/admin">Group Admin</a></li>
+				{% endif %}
+
+				{% if current_user.is_admin() %}
 					<li><a href="/admin">Admin</a></li>
 				{% endif %}
 				{% if current_user.can_ping() %}

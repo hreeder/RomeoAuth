@@ -194,8 +194,11 @@ class LDAPTools():
 			else:
 				return []
 
-		def is_admin(self):
+		def is_group_admin(self):
 			return bool(filter(lambda x:x.startswith("admin"), self.get_authgroups()))
 
+		def is_admin(self):
+			return bool("admin" in self.get_authgroups())
+
 		def can_ping(self):
-			return bool(filter(lambda x:x.startswith("ping"), self.get_authgroups()))
+			return bool(filter(lambda x:x.startswith("ping"), self.get_authgroups()) or "admin" in self.get_authgroups())
