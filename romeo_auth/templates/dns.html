@@ -58,13 +58,13 @@
 				<div class="form-group">
 					<label class="control-label col-sm-3" for="editRecordType">Record Type</label>
 					<div class="col-sm-9">
-						<input type="text" class="form-control" disabled id="editRecordType">
+						<input type="text" class="form-control" disabled id="editRecordType" name="type">
 					</div>
 				</div>
 				<div class="form-group">
 					<label class="control-label col-sm-3" for="editRecordName">Name</label>
 					<div class="col-sm-9">
-						<input type="text" class="form-control" disabled id="editRecordName">
+						<input type="text" class="form-control" disabled id="editRecordName" name="name">
 					</div>
 				</div>
 				<div class="form-group">
@@ -88,6 +88,7 @@
 				</div>
 			</div>
 			<div class="modal-footer">
+				<input type="hidden" name="recid" id="editRecordID">
 				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 				<button type="button" class="btn btn-primary">Save changes</button>
 			</div>
@@ -178,6 +179,7 @@
 		$('#editRecordName').val(name);
 		$('#editTTL').val(TTL);
 		$('#editValue').val(value);
+		$('#editRecordID').val(id);
 
 		if (cf == "Yes") {
 			$('#editCloudflare').prop('checked', true);
