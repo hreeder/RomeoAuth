@@ -5,7 +5,7 @@ from ldap import ALREADY_EXISTS
 
 @app.route('/signup')
 def signup():
-	return render_template("signup.html", session=session)
+	return render_template("signup.html")
 
 @app.route('/create_account', methods=['POST'])
 def create_account():
