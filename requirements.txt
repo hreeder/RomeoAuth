@@ -1,7 +1,15 @@
-dnspython
-xmpppy
-requests
-flask
-flask-login
-python-ldap
-blessings
+Flask==0.10.1
+Flask-Login==0.2.10
+Jinja2==2.7.2
+MarkupSafe==0.23
+Werkzeug==0.9.4
+argparse==1.2.1
+blessings==1.5.1
+dnspython==1.11.1
+eveapi==1.2.6
+itsdangerous==0.24
+python-ldap==2.4.15
+-e git+https://github.com/nikdoof/python-ts3.git@ed772ab21f12fd92a0986d70bd12f56c6d56a8cd#egg=python_ts3-dev
+requests==2.2.1
+wsgiref==0.1.2
+xmpppy==0.5.0rc1
